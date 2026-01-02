@@ -15,10 +15,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_rust_bridge: 2.11.1
+  image_picker: ^1.2.1
   intl: ^0.20.2
   rust_lib_stegano_app:
     path: rust_builder
 
+  image: any
 dev_dependencies:
   bloc_test: ^10.0.0
   flutter_test:

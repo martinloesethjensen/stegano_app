@@ -7,7 +7,9 @@ class CloakerInitial extends CloakerState {
 }
 
 class CloakerSuccess extends CloakerState {
-  const CloakerSuccess();
+  const CloakerSuccess({required this.message});
+
+  final String message;
 }
 
 class CloakerFailure extends CloakerState {
