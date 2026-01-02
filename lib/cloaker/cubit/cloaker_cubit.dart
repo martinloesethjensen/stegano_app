@@ -8,12 +8,12 @@ class CloakerCubit extends Cubit<CloakerState> {
   CloakerCubit() : super(const CloakerInitial());
 
   void cloak(Uint8List bytes, String message) {
-    cloaker.cloak(imageBytes: bytes, message: message);
-    emit(const CloakerSuccess(message: '******'));
+    final result = cloaker.cloak(imageBytes: bytes, message: message);
+    emit(CloakerSuccess(message: '******', imageData: result));
   }
 
   void uncloak(Uint8List bytes) {
     final result = cloaker.uncloak(imageBytes: bytes.toList());
-    emit(CloakerSuccess(message: result));
+    emit(CloakerSuccess(message: result, imageData: null));
   }
 }

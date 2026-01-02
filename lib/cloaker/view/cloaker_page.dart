@@ -6,6 +6,7 @@ import 'package:image/image.dart' as img;
 import 'package:stegano_app/cloaker/cubit/cloaker_cubit.dart';
 import 'package:stegano_app/cloaker/cubit/cloaker_state.dart';
 
+// TODO(mlj): remove mock method
 Uint8List generateMockImage(int width, int height) {
   // Create a blank image
   final image = img.Image(width: width, height: height);
@@ -48,23 +49,30 @@ class CloakerView extends StatelessWidget {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
+        spacing: 8,
         children: [
           FloatingActionButton(
             onPressed: () {
               context.read<CloakerCubit>().cloak(
                 generateMockImage(200, 200),
-                'Martin is awesome',
+                'Some message to hide',
               );
             },
             child: const Icon(Icons.hide_image),
           ),
-          FloatingActionButton(
-            onPressed: () {
-              context.read<CloakerCubit>().uncloak(
-                generateMockImage(200, 200),
+          BlocBuilder<CloakerCubit, CloakerState>(
+            builder: (context, state) {
+              return FloatingActionButton(
+                onPressed: () {
+                  if (state is CloakerSuccess && state.imageData != null) {
+                    context.read<CloakerCubit>().uncloak(
+                      state.imageData!,
+                    );
+                  }
+                },
+                child: const Icon(Icons.visibility),
               );
             },
-            child: const Icon(Icons.visibility),
           ),
         ],
       ),
