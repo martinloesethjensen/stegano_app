@@ -6,8 +6,11 @@
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:stegano_app/src/rust/frb_generated.dart';
 
-Uint8List? cloak({required List<int> bytes, required List<int> message}) =>
-    RustLib.instance.api.crateApiCloakerCloak(bytes: bytes, message: message);
+Uint8List cloak({required List<int> imageBytes, required String message}) =>
+    RustLib.instance.api.crateApiCloakerCloak(
+      imageBytes: imageBytes,
+      message: message,
+    );
 
-Uint8List uncloak({required List<int> bytes}) =>
-    RustLib.instance.api.crateApiCloakerUncloak(bytes: bytes);
+String uncloak({required List<int> imageBytes}) =>
+    RustLib.instance.api.crateApiCloakerUncloak(imageBytes: imageBytes);
